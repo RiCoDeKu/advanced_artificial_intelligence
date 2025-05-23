@@ -1,6 +1,6 @@
 import os
 
-from utils.loss_functions import VAELoss
+from src.utils.loss_functions import VAEL1Loss
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 import torch
 import torch.nn as nn
@@ -13,6 +13,17 @@ from src.utils.utility import save_checkpoint, load_checkpoint
 from src.utils.data_io import TensorDataset
 from torch.utils.data import DataLoader, random_split
 import shutil
+
+
+
+# 全ての訓練データを一回ずつ使用することを「1エポック」として，何エポック分学習するか
+# 再開モードの場合も, このエポック数の分だけ追加学習される（N_EPOCHSは最終エポック番号ではない）
+N_EPOCHS = 20
+
+# 特徴ベクトルの次元数
+N = 32
+
+
 
 # 前回の試行の続きを行いたい場合は True にする -> 再開モードになる．
 # なお，Colab環境で再開モードを利用する場合は，前回終了時に temp ディレクトリの中身を自分の Google Drive に退避しておき，
@@ -31,10 +42,6 @@ if DEVICE == 'cpu':
 LOSS_SCALER = torch.amp.grad_scaler.GradScaler(enabled=USE_AMP, device='cuda', init_scale=2**16)
 ADAM_EPS = 1e-4 if USE_AMP and (FLOAT_DTYPE == torch.float16) else 1e-8
 
-# 全ての訓練データを一回ずつ使用することを「1エポック」として，何エポック分学習するか
-# 再開モードの場合も, このエポック数の分だけ追加学習される（N_EPOCHSは最終エポック番号ではない）
-N_EPOCHS = 20
-
 # 学習時のバッチサイズ
 BATCH_SIZE = 100
 
@@ -48,9 +55,6 @@ VALID_IMAGES_FILE = 'tinyCelebA_valid_images.pt'
 H = 128 # 縦幅
 W = 128 # 横幅
 C = 3 # チャンネル数（カラー画像なら3，グレースケール画像なら1）
-
-# 特徴ベクトルの次元数
-N = 128
 
 # 学習結果の保存先フォルダ
 MODEL_DIR = './models/Celeb/VAE'
@@ -87,7 +91,7 @@ class ResBlock(nn.Module):
 class FaceEncoderV(nn.Module):
 
     # N: 出力の特徴ベクトルの次元数
-    def __init__(self, N, use_BatchNorm=False):
+    def __init__(self, C, H, W, N, use_BatchNorm=False):
         super(FaceEncoderV, self).__init__()
 
         # 畳込み層1～3
@@ -248,7 +252,7 @@ if RESTART_MODE:
     print('')
 
 # 損失関数
-loss_func = VAELoss(alpha=0.1)
+loss_func = VAEL1Loss(alpha=0.1)
 
 # 損失関数値を記録する準備
 loss_viz = LossVisualizer(['train loss', 'valid loss'], init_epoch=INIT_EPOCH)
