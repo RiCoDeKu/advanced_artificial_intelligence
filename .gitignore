@@ -11,5 +11,3 @@ results
 # Ignore raw datasets while they are being downloaded
 MNIST
 tinyCelebA
-
-temp
