@@ -5,8 +5,8 @@ __pycache__/
 # Ignore datasets
 data
 
-# Ignore logs
-results
-
+##### Causion #####
 # Ignore raw datasets while they are being downloaded
-tinyCelebA
+# MNIST
+# tinyCelebA
+
