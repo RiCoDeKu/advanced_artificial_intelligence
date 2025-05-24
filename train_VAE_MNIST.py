@@ -1,4 +1,5 @@
 import os
+import shutil
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -14,7 +15,8 @@ from src.VAE_MNIST import MNISTEncoderV, MNISTDecoder
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 
-N = 32
+# 特徴ベクトルの次元数
+N = 256
 N_EPOCHS = 20
 USE_BATCH_NORM = True
 
@@ -79,6 +81,10 @@ else:
 train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True, num_workers=8)
 valid_dataloader = DataLoader(valid_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, num_workers=8)
 
+# ./temp ディレクトリの中身を削除
+if os.path.exists('./temp/'):
+    shutil.rmtree('./temp/')
+    os.makedirs('./temp/')
 
 
 # エポック番号
