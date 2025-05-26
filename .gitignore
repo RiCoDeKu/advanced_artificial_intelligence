@@ -5,6 +5,10 @@ __pycache__/
 # Ignore datasets
 data
 
+temp
+models
+results
+
 ##### Causion #####
 # Ignore raw datasets while they are being downloaded
 # MNIST
