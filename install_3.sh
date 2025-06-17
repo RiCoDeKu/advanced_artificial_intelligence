@@ -1,0 +1,1 @@
+ipython kernel install --user --name=.nakamura --display-name "Nakamura AI"

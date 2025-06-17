@@ -1,0 +1,11 @@
+numpy
+scipy
+pandas
+matplotlib
+tqdm
+scikit-learn
+ipykernel
+ipywidgets
+swig
+gymnasium[box2d]
+opencv-python
