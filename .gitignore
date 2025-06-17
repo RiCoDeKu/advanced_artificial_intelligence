@@ -8,6 +8,8 @@ data
 temp
 models
 results
+Datasets
+defacto_models
 
 ##### Causion #####
 # Ignore raw datasets while they are being downloaded
