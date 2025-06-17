@@ -3,9 +3,9 @@ os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from dataset import prepare_datasets, create_dataloaders
-from model import ForgeryDetector
+from model_base import ForgeryDetector
 from trainer import trainer
+from dataset import prepare_datasets, create_dataloaders
 
 # ------------------- Configuration ------------------- #
 
@@ -63,6 +63,8 @@ print('Dataloaders prepared successfully.')
 # ------------------- Train ------------------- #
 print('Starting training...')
 model = ForgeryDetector(C=C, H=H, W=W).to(DEVICE)
+
+
 optimizer = optim.Adam(model.parameters(), eps=ADAM_EPS)
 loss_func = nn.BCELoss()
 

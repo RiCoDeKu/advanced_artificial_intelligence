@@ -104,7 +104,7 @@ def trainer(model,
         # 学習経過の表示
         if epoch == 0:
             show_images(Y.to('cpu').detach(), num=8, num_per_row=8, title='ground truth', save_fig=True, save_dir=model_dir)
-        show_images(Y_pred.to('cpu').detach(), num=8, num_per_row=8, title='epoch {0}'.format(epoch + 1), save_fig=True, save_dir=model_dir)
+        show_images(Y_pred.to('cpu').detach(), num=8, num_per_row=8, title='epoch {0}'.format(epoch + 1), save_fig=False, save_dir=model_dir)
 
         # 現在の学習状態を一時ファイルに保存
         save_checkpoint(checkpoint_epoch, checkpoint_model, checkpoint_opt, epoch+1, model, optimizer)
