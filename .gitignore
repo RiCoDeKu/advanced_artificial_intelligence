@@ -10,7 +10,7 @@ models
 results
 Datasets
 defacto_models
-
+*.png
 ##### Causion #####
 # Ignore raw datasets while they are being downloaded
 # MNIST
