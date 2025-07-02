@@ -2,6 +2,7 @@
 __pycache__/
 .venv
 
+.gitignore
 # Ignore datasets
 data
 
@@ -10,8 +11,10 @@ models
 results
 Datasets
 defacto_models
+metrics
 
-##### Causion #####
+DEFACTO_INPAINT_cpy
+##### Caution #####
 # Ignore raw datasets while they are being downloaded
 # MNIST
 # tinyCelebA
