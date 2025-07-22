@@ -10,7 +10,10 @@ models
 results
 Datasets
 defacto_models
-*.png
+
+Assignment1
+Assignment2
+
 ##### Causion #####
 # Ignore raw datasets while they are being downloaded
 # MNIST
