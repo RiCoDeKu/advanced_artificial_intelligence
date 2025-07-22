@@ -11,8 +11,8 @@ results
 Datasets
 defacto_models
 
-Assignment1
-Assignment2
+Assignment1/*.png
+Assignment2/*.png
 
 ##### Causion #####
 # Ignore raw datasets while they are being downloaded
